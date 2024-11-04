@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Conventional commit regex allowing optional scope in parentheses
+conventional_regex="^(feat|fix|chore|docs|style|refactor|perf|test|build|ci|revert|wip|release|merge)(\([^)]+\))?: .+"
+
+# Read the commit message
+commit_message=$(cat "$1")
+
+# Check if the commit message matches the conventional commit format
+if [[ ! "$commit_message" =~ $conventional_regex ]]; then
+    echo -e "\e[31mError: Commit message does not follow Conventional Commit format.\e[0m"
+    echo "Example formats:"
+    echo "  feat: add a new feature"
+    echo "  fix: fix a bug"
+    echo "  chore: misc changes"
+    echo "  docs: update documentation"
+    echo "  style: code style changes"
+    echo -e "\e[33mUse conventional format (e.g., feat, fix) and meaningful description.\e[0m"
+    exit 1
+fi
