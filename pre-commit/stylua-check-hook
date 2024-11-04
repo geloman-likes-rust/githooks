@@ -1,0 +1,3 @@
+#!/bin/sh
+
+[ -n "$(command -v stylua)" ] && stylua --check $(git rev-parse --show-toplevel)
